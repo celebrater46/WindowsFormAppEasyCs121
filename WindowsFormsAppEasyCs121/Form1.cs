@@ -32,7 +32,9 @@ namespace WindowsFormsAppEasyCs121
                 new { num = 4, name = "Fuso" },
             };
 
-            IEnumerable qry = from K in cars select new { K.name, K.num };
+            // IEnumerable qry = from K in cars select new { K.name, K.num }; // 2, 3, 4
+            // IEnumerable qry = from K in cars where K.num <= 3 select new { K.name, K.num }; // 2, 3
+            IEnumerable qry = from K in cars where K.num <= 3 orderby K.num descending select new { K.name, K.num }; // 3, 2
 
             foreach (var tmp in qry)
             {
