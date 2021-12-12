@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +13,33 @@ namespace WindowsFormsAppEasyCs121
 {
     public partial class Form1 : Form
     {
+        private ListBox lbx;
+        
         public Form1()
         {
             InitializeComponent();
+            this.Text = "Get All Data";
+            this.Width = 300;
+            this.Height = 200;
+
+            lbx = new ListBox();
+            lbx.Dock = DockStyle.Fill;
+
+            var cars = new[]
+            {
+                new { num = 2, name = "Benz" },
+                new { num = 3, name = "Ferrari" },
+                new { num = 4, name = "Fuso" },
+            };
+
+            IEnumerable qry = from K in cars select new { K.name, K.num };
+
+            foreach (var tmp in qry)
+            {
+                lbx.Items.Add(tmp);
+            }
+
+            lbx.Parent = this;
         }
     }
 }
